@@ -1,10 +1,9 @@
 #!/bin/bash
-PATH_VALGRIND=$1
 function logit(){
     echo "[php_build] $@" 1>&2
 }
 #main
-wget http://www.valgrind.org/downloads/valgrind-3.14.0.tar.bz2 && tar -xjvf valgrind-3.14.0.tar.bz2 && cd valgrind-3.14.0/ && ./configure --prefix=$PATH_VALGRIND && make &&make install
+wget http://www.valgrind.org/downloads/valgrind-3.14.0.tar.bz2 && tar -xjvf valgrind-3.14.0.tar.bz2 && cd valgrind-3.14.0/ && ./configure && make &&make install
 
 ret=$?
 
