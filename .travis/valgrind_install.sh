@@ -1,7 +1,6 @@
 #!/bin/bash
 PATH_VALGRIND=$1
-
-function logit() {
+function logit(){
     echo "[php_build] $@" 1>&2
 }
 #main
