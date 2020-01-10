@@ -30,10 +30,10 @@ function build()
     # configure, make
     $phpize &&
     if [ -z "$extension_name" ]; then
-        ./configure --with-php-config=$phpcfg && \
+        ./configure --with-php-config=$phpcfg --enable-debug && \
         make install
     else
-        ./configure --with-php-config=$phpcfg --enable-level-id && \
+        ./configure --with-php-config=$phpcfg --enable-level-id --enable-debug && \
         make install
         change_ex_name $extension_name
     fi
