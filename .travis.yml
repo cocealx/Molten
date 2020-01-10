@@ -53,12 +53,16 @@ before_install:
 
     # install composer install vendor
     - (.travis/composer_install.sh $MO_PHP_VERSION $MO_PHP_TEST)
-    - (cd tests && curl -s http://getcomposer.org/installer|$MO_PHP_BIN && $MO_PHP_BIN composer.phar install)
-
+    - (cd tests && curl -s http://getcomposer.org/installer|$MO_PHP_BIN && $MO_PHP_BIN composer.phar install)    
+    
+    # install valgrind
+    - ls -ll  
+    - mkdir -p valgrind
+    - (sh .travis/valgrind_install.sh valgrind)
+    
     # install extension
     - (sh .travis/ext_install.sh $MO_PHP_PATH $MO_PHP_VERSION)
-    # install valgrind
-    - (mkdir valgrind && sh .travis/valgrind_install.sh valgrind)
+    
 before_script:
     - sleep 10
 

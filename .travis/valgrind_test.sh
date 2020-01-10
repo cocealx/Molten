@@ -14,3 +14,4 @@ logit "[valgrind-3.14.0] done"
 else
 logit "[valgrind-3.14.0] fail"
 fi
+cd ../
