@@ -20,7 +20,7 @@ function build_from_tar()
     rm -fr $src && tar jxf $tar
 
     # build
-    build $1 $src
+    build $1 $src "debug"
 }
 
 function build()
