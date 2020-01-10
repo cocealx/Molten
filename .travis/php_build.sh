@@ -21,7 +21,7 @@ function build_from_tar()
 
     # build
     build $1 $src
-}
+ }
 
 function build()
 {
@@ -30,10 +30,9 @@ function build()
     src=$2
 
     # debug
-    param_debug=""
+    param_debug="--enable-debug"
     prefix_debug=""
     if [ -n "$3" ]; then
-        param_debug="--enable-debug"
         prefix_debug="-debug"
     fi
 

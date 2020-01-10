@@ -53,11 +53,13 @@ before_install:
 
     # install composer install vendor
     - (.travis/composer_install.sh $MO_PHP_VERSION $MO_PHP_TEST)
-    - (cd tests && curl -s http://getcomposer.org/installer|$MO_PHP_BIN && $MO_PHP_BIN composer.phar install)
-
+    - (cd tests && curl -s http://getcomposer.org/installer|$MO_PHP_BIN && $MO_PHP_BIN composer.phar install)    
+    
+    # install valgrind
+     .travis/valgrind_install.sh ${TRAVIS_BUILD_DIR}    
     # install extension
     - (sh .travis/ext_install.sh $MO_PHP_PATH $MO_PHP_VERSION)
-
+    
 before_script:
     - sleep 10
 
@@ -65,10 +67,14 @@ before_script:
     #- .travis/ext_build.sh ${MO_PHP_PATH} $MO_EXTENSION_NEW
     
     # build normal extension
-    - .travis/ext_build.sh ${MO_PHP_PATH}
+    - sh .travis/ext_build.sh ${MO_PHP_PATH}
 
 script:
-    - (REPORT_EXIT_STATUS=1 TEST_PHP_EXECUTABLE=${MO_PHP_BIN} ${MO_PHP_BIN} -n run-tests.php -q -n -d extension=molten.so -d extension=redis.so -d extension=mongodb.so -d extension=memcached.so --show-diff)
+    - export USE_ZEND_ALLOC=0 
+    - export ZEND_DONT_UNLOAD_MODULES=1
+    - .travis/ext_build.sh ${MO_PHP_PATH}
+    - (REPORT_EXIT_STATUS=1 TEST_PHP_EXECUTABLE=${MO_PHP_BIN} ${TRAVIS_BUILD_DIR}/valgrind --leak-check=full --errors-for-leak-kinds=definite,indirect,possible ${MO_PHP_BIN} -n run-tests.php -q -n -d extension=molten.so -d extension=redis.so -d extension=mongodb.so -d extension=memcached.so --show-diff)
+
 
       #- (REPORT_EXIT_STATUS=1 TEST_PHP_EXECUTABLE=${MO_PHP_BIN} ${MO_PHP_BIN} -n run-tests.php -q -n -d extension=${MO_EXTENSION_NEW}.so -d extension=redis.so -d extension=mongodb.so -d extension=memcached.so --show-diff)
 
