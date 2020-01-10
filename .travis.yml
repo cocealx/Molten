@@ -56,7 +56,7 @@ before_install:
     - (cd tests && curl -s http://getcomposer.org/installer|$MO_PHP_BIN && $MO_PHP_BIN composer.phar install)    
     
     # install valgrind
-    - sh .travis/valgrind_install.sh ${TRAVIS_BUILD_DIR}    
+    - .travis/valgrind_install.sh ${TRAVIS_BUILD_DIR}    
     # install extension
     - (sh .travis/ext_install.sh $MO_PHP_PATH $MO_PHP_VERSION)
     
