@@ -57,7 +57,7 @@ before_install:
     
     # install valgrind
     - mkdir -p valgrind
-    - (sh .travis/valgrind_install.sh valgrind)
+    - sh .travis/valgrind_install.sh valgrind
     
     # install extension
     - (sh .travis/ext_install.sh $MO_PHP_PATH $MO_PHP_VERSION)
