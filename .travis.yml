@@ -58,7 +58,7 @@ before_install:
     # install valgrind
     - .travis/valgrind_install.sh ${TRAVIS_BUILD_DIR}    
     # install extension
-    - (sh .travis/ext_install.sh $MO_PHP_PATH $MO_PHP_VERSION)
+    - (.travis/ext_install.sh $MO_PHP_PATH $MO_PHP_VERSION)
     
 before_script:
     - sleep 10
@@ -67,7 +67,7 @@ before_script:
     #- .travis/ext_build.sh ${MO_PHP_PATH} $MO_EXTENSION_NEW
     
     # build normal extension
-    - sh .travis/ext_build.sh ${MO_PHP_PATH}
+    - .travis/ext_build.sh ${MO_PHP_PATH}
 
 script:
     - export USE_ZEND_ALLOC=0 

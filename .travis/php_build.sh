@@ -1,5 +1,5 @@
 #!/bin/bash
-function logit() {
+function logit(){
     echo "[php_build] $@" 1>&2
 }
 
